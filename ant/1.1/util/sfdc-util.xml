@@ -401,8 +401,20 @@ ${sfdc-util.SF-JAR.PATH}
                 return xmlMap.get(dirName);
             }
 
+            boolean isBlankFileName(String fileName) {
+                return null == fileName || "".equals(fileName) || "".equals(fileName.trim());
+            }
+
+            boolean isPackageXmlFile(String fileName) {
+                return "package.xml".equals(fileName.trim());
+            }
+
+            boolean isMetaXmlFile(String fileName) {
+                return fileName.trim().endsWith("-meta.xml");
+            }
+
             boolean isFileSkip(String fileName) {
-                return "package.xml".equals(fileName) || fileName.endsWith("-meta.xml");
+                return  isBlankFileName(fileName) || isPackageXmlFile(fileName) || isMetaXmlFile(fileName);
             }
 
             int getExtensionIndex(int lastIndex, int fileNameLength) {
